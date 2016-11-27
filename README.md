@@ -2,7 +2,7 @@
 Simple class to check if iOS app has been cracked, being debugged or enriched with custom dylib and as well detect jailbroken environment<br>
 
 # Usage
-Just drag (SecurityClass.m)[https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security] and (SecurityClass.h)[https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security] to your project, then add
+Just drag [SecurityClass.m](https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security) and [SecurityClass.h](https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security) to your project, then add
 ```objc
 #import SecurityClass.h
 ```
