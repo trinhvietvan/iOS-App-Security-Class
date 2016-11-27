@@ -6,7 +6,7 @@ Just drag (SecurityClass.m)[https://github.com/karek314/iOS-App-Security-Class/t
 ```objc
 #import SecurityClass.h
 ```
-If you want to just test and see how it works, clone repository and open in Xcode and compile.
+If you want to just test and see how it works, clone repository, open in Xcode and compile.
 
 <b>SecurityClass.m</b> allows you easily check if your iOS App:<br>
 1. Has been cracked with tool like Clutch or manually<br>
