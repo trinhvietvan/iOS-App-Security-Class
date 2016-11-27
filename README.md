@@ -4,7 +4,7 @@ Simple class to check if iOS app has been cracked, being debugged or enriched wi
 # Usage
 Just drag [SecurityClass.m](https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security) and [SecurityClass.h](https://github.com/karek314/iOS-App-Security-Class/tree/master/iOS-App-Security) to your project, then add
 ```objc
-#import SecurityClass.h
+#import "SecurityClass.h"
 ```
 If you want to just test and see how it works, clone repository, open in Xcode and compile.
 
