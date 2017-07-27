@@ -139,22 +139,36 @@ struct encryption_info_command {
     }
 }
 
-+(NSString *)proxy_host{
++(NSString *)proxy_host {
     CFDictionaryRef dicRef = CFNetworkCopySystemProxySettings();
     const CFStringRef proxyCFstr = (const CFStringRef)CFDictionaryGetValue(dicRef,(const void*)kCFNetworkProxiesHTTPProxy);
-    return  (__bridge NSString *)proxyCFstr;
+    NSString *tmp = (__bridge NSString *)proxyCFstr;
+    if ([tmp isEqualToString:@""] || [tmp isEqualToString:@"(null)"] || [tmp length] < 1) {
+        const CFStringRef socksproxyCFstr = (const CFStringRef)CFDictionaryGetValue(dicRef,(const void*)kCFNetworkProxiesSOCKSProxy);
+        tmp = (__bridge NSString *)socksproxyCFstr;
+    }
+    return  tmp;
+    
 }
 
-+(NSString*)proxy_port{
++(NSString*)proxy_port {
     CFDictionaryRef dicRef = CFNetworkCopySystemProxySettings();
     const CFNumberRef portCFnum = (const CFNumberRef)CFDictionaryGetValue(dicRef, (const void*)kCFNetworkProxiesHTTPPort);
     SInt32 port;
+    NSString *tmp = @"";
     if (portCFnum) {
-        if (CFNumberGetValue(portCFnum, kCFNumberSInt32Type, &port)) {
-            return [NSString stringWithFormat:@"%i",(int)port];
+        if (CFNumberGetValue(portCFnum, kCFNumberSInt32Type, &port)){
+            tmp = [NSString stringWithFormat:@"%i",(int)port];
+        }
+    } else {
+        const CFNumberRef portCFnumSocks = (const CFNumberRef)CFDictionaryGetValue(dicRef, (const void*)kCFNetworkProxiesSOCKSPort);
+        if (portCFnumSocks) {
+            if (CFNumberGetValue(portCFnumSocks, kCFNumberSInt32Type, &port)){
+                tmp = [NSString stringWithFormat:@"%i",(int)port];
+            }
         }
     }
-    return @"";
+    return tmp;
 }
 
 static int process_list(struct kinfo_proc **procList, size_t *procCount){
