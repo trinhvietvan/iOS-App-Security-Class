@@ -17,8 +17,7 @@ If you want to just test and see how it works, clone repository, open in Xcode a
 
 Repository contains example app, feel free to test. If you want to import it in your project just copy <b>SecurityClass.m</b> & <b>SecurityClass.h</b>
 
-This class shouldn't be used unobfuscated, and possibly should be splitted to inline code in desired function related to app security also strings used should be at least encrypted with AES. But for most 'hackers' it will be hard at this point to crack it, even without obfuscation. But actually without that it can be hooked relatively easily, anyway i suggest use this along with [Objective-C CLI Obfuscator]
-(https://github.com/karek314/Objective-C-CLI-Obfuscator) but even with this, any good hacker will hack your app anyway - this lifts up a bar a bit and makes hacking longer and harder, if incentive is lower than security used in app then it should be just fine.
+This class shouldn't be used unobfuscated, and possibly should be splitted to inline code in desired function related to app security also strings used should be at least encrypted with AES. But for most attackers it will be hard at this point to crack it, even without obfuscation.
 
 ### Apple FairPlay Crack Detection
 Check if currently running binary is encrypted (Signed by developer and Apple)
