@@ -233,6 +233,12 @@ static int process_list(struct kinfo_proc **procList, size_t *procCount){
         return YES;
     } else if([[NSFileManager defaultManager] fileExistsAtPath:@"/private/var/lib/apt/"]){
         return YES;
+    }else if (![[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/AppStore.app"]){
+        //if PSProtector activated -- Tested on iOS 11.0.1
+        return YES;
+    }else if (![[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/MobileSafari.app"]){
+        //if PSProtector activated -- Tested on iOS 11.0.1
+        return YES;
     }
     if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://package/com.example.package"]]){
         return YES;
