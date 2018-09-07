@@ -131,46 +131,6 @@ struct encryption_info_command {
     return NO;
 }
 
-+(BOOL)isConnectionProxied{
-    if (![[self proxy_host] isEqualToString:@""] && ![[self proxy_port] isEqualToString:@""]){
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-+(NSString *)proxy_host {
-    CFDictionaryRef dicRef = CFNetworkCopySystemProxySettings();
-    const CFStringRef proxyCFstr = (const CFStringRef)CFDictionaryGetValue(dicRef,(const void*)kCFNetworkProxiesHTTPProxy);
-    NSString *tmp = (__bridge NSString *)proxyCFstr;
-    if ([tmp isEqualToString:@""] || [tmp isEqualToString:@"(null)"] || [tmp length] < 1) {
-        const CFStringRef socksproxyCFstr = (const CFStringRef)CFDictionaryGetValue(dicRef,(const void*)kCFNetworkProxiesSOCKSProxy);
-        tmp = (__bridge NSString *)socksproxyCFstr;
-    }
-    return  tmp;
-    
-}
-
-+(NSString*)proxy_port {
-    CFDictionaryRef dicRef = CFNetworkCopySystemProxySettings();
-    const CFNumberRef portCFnum = (const CFNumberRef)CFDictionaryGetValue(dicRef, (const void*)kCFNetworkProxiesHTTPPort);
-    SInt32 port;
-    NSString *tmp = @"";
-    if (portCFnum) {
-        if (CFNumberGetValue(portCFnum, kCFNumberSInt32Type, &port)){
-            tmp = [NSString stringWithFormat:@"%i",(int)port];
-        }
-    } else {
-        const CFNumberRef portCFnumSocks = (const CFNumberRef)CFDictionaryGetValue(dicRef, (const void*)kCFNetworkProxiesSOCKSPort);
-        if (portCFnumSocks) {
-            if (CFNumberGetValue(portCFnumSocks, kCFNumberSInt32Type, &port)){
-                tmp = [NSString stringWithFormat:@"%i",(int)port];
-            }
-        }
-    }
-    return tmp;
-}
-
 static int process_list(struct kinfo_proc **procList, size_t *procCount){
     int err;
     struct kinfo_proc * result;
